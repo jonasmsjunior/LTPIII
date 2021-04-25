@@ -4,3 +4,5 @@
     <p><b>{{$post->title}}</b><p>
     <p>{{$post->content}}<p>
 @endforeach
+
+<a href="{{ route('posts.create') }}">ADD</a>
