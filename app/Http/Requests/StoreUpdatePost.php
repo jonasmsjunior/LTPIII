@@ -24,7 +24,7 @@ class StoreUpdatePost extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|min:5|cpf',
+            'title' => 'required|min:5',
             'content'=> 'required|min:5|max:200',
         ];
     }
