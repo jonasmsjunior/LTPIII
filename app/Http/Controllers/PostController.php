@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
     public function index(){
-        $posts = Post::get();
+        $posts = Post::orderby('title', 'DESC')->paginate(1);
         return view('admin.posts.index', compact('posts'));
     }
 
@@ -54,5 +54,15 @@ class PostController extends Controller
             ->route('posts.index')
             ->with('message', 'Alterado com sucesso')
         ;
+    }
+
+    public function search(Request $request){
+
+        $filtro = $request->all();
+        $posts = Post:: where ('title', 'LIKE', "%{$request->filtro}%")
+                        ->orwhere ('content', 'LIKE', "%{$request->filtro}%")
+                        ->orderby('title', 'DESC')
+                        ->paginate(1);
+        return view('admin.posts.index', compact('posts', 'filtro'));
     }
 }

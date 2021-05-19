@@ -5,6 +5,8 @@ use App\Http\Controllers\{
 };
 use Illuminate\Support\Facades\Route;
 
+Route::any('/posts/search', [PostController::class, 'search'])->name('posts.search');
+
 Route::put('/posts/{id}',[PostController::class, 'update'])->name('posts.update');
 
 Route::get('/posts/edit/{id}', [PostController::class, 'edit'])->name('posts.edit');

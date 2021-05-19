@@ -2,7 +2,13 @@
     <p> {{ session('message') }}</p>
 @endif
 <h1> Comentarios</h1>
+<a href="{{ route('posts.create') }}">ADD</a>
 
+<form action="{{ route('posts.search') }}" method="post">
+    @csrf
+    <input type="text" name="filtro">
+    <button type="submit">filtar</button>
+</form>
 @foreach($posts as $post)
     <p><b>{{$post->title}}</b><p>
     <p>{{$post->content}}<p>
@@ -22,4 +28,9 @@
     --------------------------------------------------------------
 @endforeach
 
-<a href="{{ route('posts.create') }}">ADD</a>
+@if(isset($filtro))
+    {{ $posts->appends($filtro)->links() }}
+@else
+    {{ $posts->links() }}
+@endif
+
